@@ -8,6 +8,13 @@
       "license": "Apache-2.0"
     },
     {
+      "component": "LuoMaster and LuoBackup worker",
+      "repo": "https://github.com/tomh500/LuoMaster.git",
+      "tag": "v0.1.0",
+      "commit": "397e3fa26516de5670f9d2d964dd17fc8b3ae39b",
+      "license": "Apache-2.0"
+    },
+    {
       "component": "ShengGalaSMP-Plugins",
       "repo": "https://github.com/tomh500/ShengGalaSMP-Plugins.git",
       "commit": "4bcca8f1c5c481bf2e5b817bdc71ca7b3671ea2a",
@@ -28,7 +35,7 @@
     }
   ],
   "pending": [
-    "luo-master public revision and build lock",
+    "LuoMaster and LuoBackup worker verified Ubuntu release artifact hashes",
     "Renamed SpigotMaster, BungeeMaster and FabricMaster release lock",
     "Exact legal upstream core/vendor artifact list for a downloadable profile"
   ]
