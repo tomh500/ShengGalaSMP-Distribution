@@ -13,7 +13,7 @@ from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1]
 FILES = (
-    "VERSION", "LICENSE", "README.md", "bootstrap.sh", "install.sh",
+    "VERSION", "LICENSE", "LICENSE-APACHE", "README.md", "bootstrap.sh", "install.sh",
     "tools/release.py", "topologyctl.py", "artifacts.py",
     "config/topology.example.json", "config/artifacts.example.json",
     "config/server.properties.example", "config/bungee-routing.example.yml",

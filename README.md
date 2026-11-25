@@ -30,3 +30,7 @@ python3 "$ctl" stop
 ## 重建总装
 
 `python tools/release.py build --output dist` 可在 Windows 或 Linux 运行。归档按文件清单生成，顺序、属主、权限与时间戳固定。在同一 Python/zlib 工具链下，同一内容重复构建应得到相同 SHA-256。第三方依赖和自研源码分别采用 [固定版本检出与构建流程](docs/components.md#构建顺序)，许可和构建验证通过后再生成组件锁。
+
+## 许可证
+
+本仓库自研的总装脚本、配置模板、测试、版本锁和文档采用 `MIT OR Apache-2.0`。使用者可选择 [MIT](LICENSE) 或 [Apache License 2.0](LICENSE-APACHE) 的条款。版本锁引用的服务端核心、插件、模组、网络软件和其他第三方组件继续适用各自的许可证与署名。
