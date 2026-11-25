@@ -1,0 +1,11 @@
+[Unit]
+Description=Check that the uplink can select a preferred global IPv6 source
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/mc-network/ipv6.env
+ExecStart=/usr/bin/python3 /usr/local/libexec/mc-network/wait-network.py ipv6 --timeout 30
+TimeoutStartSec=35s
+NoNewPrivileges=yes
+CapabilityBoundingSet=

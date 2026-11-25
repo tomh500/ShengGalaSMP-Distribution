@@ -1,0 +1,8 @@
+{
+  "adapter": "Radmin VPN",
+  "service": "RvControlSvc",
+  "program": "",
+  "peer": "",
+  "port": 25565,
+  "timeoutSeconds": 30
+}

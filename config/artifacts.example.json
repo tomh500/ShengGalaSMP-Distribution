@@ -1,0 +1,27 @@
+{
+  "release": "0.1.0",
+  "nodes": {
+    "lobby": [
+      {
+        "file": "inputs/spigot-1.12.2.jar",
+        "target": "spigot-1.12.2.jar",
+        "sha256": "REPLACE_WITH_VERIFIED_SHA256",
+        "replaces": null
+      }
+    ],
+    "proxy": [
+      {
+        "file": "inputs/BungeeCord.jar",
+        "target": "BungeeCord.jar",
+        "sha256": "REPLACE_WITH_VERIFIED_SHA256",
+        "replaces": null
+      },
+      {
+        "file": "inputs/BungeeMasterGAL-0.2.0.jar",
+        "target": "plugins/BungeeMasterGAL-0.2.0.jar",
+        "sha256": "REPLACE_WITH_VERIFIED_SHA256",
+        "replaces": null
+      }
+    ]
+  }
+}

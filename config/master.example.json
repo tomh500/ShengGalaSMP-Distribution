@@ -1,0 +1,54 @@
+{
+  "port": 18776,
+  "http_workers": 4,
+  "action_timeout_seconds": 120,
+  "archive_timeout_seconds": 900,
+  "state_dir": "/srv/group-server/master/state",
+  "archive_dir": "/srv/group-server/master/archives",
+  "lifecycle": "/srv/group-server/bin/master-lifecycle",
+  "observer_token_file": "/srv/group-server/private/master-observe.token",
+  "backup_token_file": "/srv/group-server/private/master-submit.token",
+  "worker_token_file": "/srv/group-server/private/master-worker.token",
+  "nodes": [
+    {
+      "id": "lobby",
+      "depends_on": [],
+      "save": true
+    },
+    {
+      "id": "survival",
+      "depends_on": [],
+      "save": true
+    },
+    {
+      "id": "bw",
+      "depends_on": [],
+      "save": true
+    },
+    {
+      "id": "minigames",
+      "depends_on": [],
+      "save": true
+    },
+    {
+      "id": "proxy",
+      "depends_on": [
+        "lobby",
+        "survival",
+        "bw",
+        "minigames"
+      ],
+      "save": false
+    }
+  ],
+  "profiles": {
+    "survival": {
+      "source": "/srv/group-server/survival",
+      "include": [
+        "world",
+        "world_nether",
+        "world_the_end"
+      ]
+    }
+  }
+}

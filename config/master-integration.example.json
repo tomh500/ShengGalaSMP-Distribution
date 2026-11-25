@@ -1,0 +1,21 @@
+{
+  "unit": "luo-master.service",
+  "exec": [
+    "/opt/luo-master/bin/luo-master",
+    "--config",
+    "/srv/group-server/private/master.json"
+  ],
+  "ready": "http://127.0.0.1:18776/readyz",
+  "adapter_path": "/srv/group-server/bin/master-lifecycle",
+  "adapter_argv": [
+    "<action>",
+    "<node-id>"
+  ],
+  "site_policy_example": {
+    "qq_owner_forwarding_enabled": false,
+    "qq_token_file": "/srv/group-server/private/master-qq.token",
+    "proxy_token_file": "/srv/group-server/private/master-proxy.token",
+    "qq_allowed_actions": [],
+    "proxy_allowed_actions": []
+  }
+}

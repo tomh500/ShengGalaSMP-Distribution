@@ -1,0 +1,9 @@
+# Start the selected Spigot version once and merge the matching keys into server.properties.
+# Change the two ports per node and set bungeecord: true in the generated spigot.yml.
+server-ip=127.0.0.1
+server-port=25566
+online-mode=false
+enable-status=true
+enable-rcon=false
+rcon.port=25666
+rcon.password=

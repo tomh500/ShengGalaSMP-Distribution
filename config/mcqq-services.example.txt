@@ -1,0 +1,26 @@
+# ~/.config/systemd/user/mcqq-api.service
+[Unit]
+Description=MCQQBridge API
+
+[Service]
+Type=exec
+UMask=0077
+WorkingDirectory=%h/.local/share/mcqq-runtime
+Environment=MCQQ_SETTINGS=%h/.config/mcqq/settings.yml
+ExecStart=%h/.local/share/mcqq-runtime/.venv/bin/python -m mcqq.service
+Restart=on-failure
+RestartSec=5
+
+# ~/.config/systemd/user/mcqq-bot.service
+[Unit]
+Description=MCQQBridge Bot
+After=mcqq-api.service
+
+[Service]
+Type=exec
+UMask=0077
+WorkingDirectory=%h/.local/share/mcqq-runtime
+Environment=MCQQ_SETTINGS=%h/.config/mcqq/settings.yml
+ExecStart=%h/.local/share/mcqq-runtime/.venv/bin/python -m mcqq.bot
+Restart=on-failure
+RestartSec=5

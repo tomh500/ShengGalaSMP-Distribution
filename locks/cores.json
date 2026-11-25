@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "compatibility_baseline": [
+    {
+      "file": "BungeeCord.jar",
+      "build": "git:BungeeCord-Bootstrap:26.1-R0.1-SNAPSHOT:502ca71:2096",
+      "runtime": "Java 25",
+      "sha256": "822e034c64c86889b91728fc9a90e74157816879f2cda6e9ccbd5ca5d8515c8a"
+    },
+    {
+      "file": "spigot-1.12.2.jar",
+      "build": "git-Spigot-79a30d7-f4830a1",
+      "runtime": "Java 8 for the fixture; Java 25 also observed for the existing lobby",
+      "sha256": "4486b7815ed6c85e8b2e6af9e2f579ff096e5a588bec1a447015993fd52138f1"
+    },
+    {
+      "file": "spigot-26.2.jar",
+      "build": "26.2-R0.1-SNAPSHOT bundler",
+      "runtime": "Java 25",
+      "sha256": "a880aea1313cc2c29d67a448cba37bb7314195d3c602519374ada35efc0ff4bb"
+    }
+  ],
+  "notes": "Compatibility check only. Obtain the server jars legally or build them from their own upstream sources. Site release locks for additional artifacts are separate."
+}

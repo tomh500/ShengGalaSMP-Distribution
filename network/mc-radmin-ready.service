@@ -1,0 +1,11 @@
+[Unit]
+Description=Check that the local Radmin overlay interface is ready
+After=network.target radmin-vpn.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/mc-network/radmin.env
+ExecStart=/usr/bin/python3 /usr/local/libexec/mc-network/wait-network.py radmin --timeout 30
+TimeoutStartSec=35s
+NoNewPrivileges=yes
+CapabilityBoundingSet=

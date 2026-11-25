@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "component": "MCQQBridge and released GAL components",
+      "repo": "https://github.com/tomh500/MCQQBridge.git",
+      "commit": "da7bfb34a215e982df04da5daa7f64c5718c007f",
+      "license": "Apache-2.0"
+    },
+    {
+      "component": "ShengGalaSMP-Plugins",
+      "repo": "https://github.com/tomh500/ShengGalaSMP-Plugins.git",
+      "commit": "4bcca8f1c5c481bf2e5b817bdc71ca7b3671ea2a",
+      "license": "MIT"
+    },
+    {
+      "component": "LuoGameBalance",
+      "repo": "https://github.com/tomh500/LuoGameBalance.git",
+      "commit": "7e7a358fc510ff2d97900a322e8fa6ac0f6f6d03",
+      "license": "MIT"
+    },
+    {
+      "component": "NeteasePets",
+      "repo": "https://github.com/tomh500/NeteasePets.git",
+      "commit": "e81efd5c7c40963a828cf8b357207d9448ef8152",
+      "license": "MIT",
+      "redistribution": "external-only; verify rights in reconstructed content"
+    }
+  ],
+  "pending": [
+    "luo-master public revision and build lock",
+    "Renamed SpigotMaster, BungeeMaster and FabricMaster release lock",
+    "Exact legal upstream core/vendor artifact list for a downloadable profile"
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "nodes": {
+    "network-manager": {
+      "enabled": false,
+      "scope": "system",
+      "unit": "NetworkManager.service",
+      "manage": false
+    },
+    "dhcpcd": {
+      "enabled": false,
+      "scope": "system",
+      "unit": "dhcpcd.service",
+      "manage": false
+    },
+    "ipv6-ra": {
+      "enabled": false,
+      "scope": "system",
+      "unit": "ipv6-uplink-ra.service",
+      "manage": false,
+      "allow_unit_exited": true
+    },
+    "ipv6-ready": {
+      "enabled": false,
+      "manage": false,
+      "probes": [
+        {
+          "type": "command",
+          "argv": [
+            "/usr/bin/python3",
+            "/usr/local/libexec/mc-network/wait-network.py",
+            "ipv6",
+            "--timeout",
+            "2"
+          ]
+        }
+      ]
+    },
+    "ipv6-listener": {
+      "enabled": false,
+      "manage": false,
+      "ready_timeout": 360,
+      "depends": [
+        "ipv6-ready"
+      ],
+      "probes": [
+        {
+          "type": "http",
+          "url": "http://127.0.0.1:8080/"
+        }
+      ]
+    },
+    "ddns": {
+      "enabled": false,
+      "scope": "system",
+      "unit": "ddns-go.service",
+      "depends": [
+        "ipv6-ready"
+      ],
+      "manage": false,
+      "stop_managed": false
+    },
+    "vpn": {
+      "enabled": false,
+      "scope": "system",
+      "unit": "radmin-vpn.service",
+      "manage": false,
+      "probes": [
+        {
+          "type": "command",
+          "argv": [
+            "/usr/bin/python3",
+            "/usr/local/libexec/mc-network/wait-network.py",
+            "radmin",
+            "--timeout",
+            "2"
+          ]
+        }
+      ],
+      "stop_managed": false
+    },
+    "vpn-heartbeat": {
+      "enabled": false,
+      "scope": "system",
+      "unit": "radminheart.service",
+      "depends": [
+        "vpn"
+      ],
+      "manage": false,
+      "stop_managed": false
+    },
+    "qq-api": {
+      "enabled": false,
+      "unit": "mcqq-api.service",
+      "probes": [
+        {
+          "type": "http",
+          "url": "http://127.0.0.1:18765/healthz"
+        }
+      ],
+      "process": {
+        "cwd": "/srv/group-server/mcqq",
+        "argv": [
+          "/srv/group-server/mcqq/.venv/bin/python",
+          "-m",
+          "mcqq.service"
+        ],
+        "environment_file": "/srv/group-server/private/mcqq.env"
+      }
+    },
+    "qq-bot": {
+      "enabled": false,
+      "unit": "mcqq-bot.service",
+      "depends": [
+        "qq-api"
+      ],
+      "process": {
+        "cwd": "/srv/group-server/mcqq",
+        "argv": [
+          "/srv/group-server/mcqq/.venv/bin/python",
+          "-m",
+          "mcqq.bot"
+        ],
+        "environment_file": "/srv/group-server/private/mcqq.env"
+      }
+    },
+    "lobby": {
+      "unit": "luo-java@lobby.service",
+      "cwd": "/srv/group-server/lobby",
+      "java": {
+        "bin": "/opt/jdk8/bin/java",
+        "jar": "spigot-1.12.2.jar",
+        "jvm_args": [
+          "-Xms512m",
+          "-Xmx2g"
+        ],
+        "args": [
+          "nogui"
+        ],
+        "stop": "stop"
+      },
+      "probes": [
+        {
+          "type": "minecraft",
+          "host": "127.0.0.1",
+          "port": 25566,
+          "protocol": 340
+        }
+      ],
+      "save_rcon": {
+        "port": 25666,
+        "password_file": "/srv/group-server/private/lobby.rcon"
+      }
+    },
+    "survival": {
+      "unit": "luo-java@survival.service",
+      "cwd": "/srv/group-server/survival",
+      "java": {
+        "bin": "/opt/jdk25/bin/java",
+        "jar": "spigot-26.2.jar",
+        "jvm_args": [
+          "-Xms512m",
+          "-Xmx2g"
+        ],
+        "args": [
+          "nogui"
+        ],
+        "stop": "stop"
+      },
+      "probes": [
+        {
+          "type": "minecraft",
+          "host": "127.0.0.1",
+          "port": 25567,
+          "protocol": 775
+        }
+      ],
+      "save_rcon": {
+        "port": 25667,
+        "password_file": "/srv/group-server/private/survival.rcon"
+      }
+    },
+    "bw": {
+      "unit": "luo-java@bw.service",
+      "cwd": "/srv/group-server/bw",
+      "java": {
+        "bin": "/opt/jdk8/bin/java",
+        "jar": "spigot-1.12.2.jar",
+        "jvm_args": [
+          "-Xms512m",
+          "-Xmx2g"
+        ],
+        "args": [
+          "nogui"
+        ],
+        "stop": "stop"
+      },
+      "probes": [
+        {
+          "type": "minecraft",
+          "host": "127.0.0.1",
+          "port": 25568,
+          "protocol": 340
+        }
+      ],
+      "save_rcon": {
+        "port": 25668,
+        "password_file": "/srv/group-server/private/bw.rcon"
+      }
+    },
+    "minigames": {
+      "unit": "luo-java@minigames.service",
+      "cwd": "/srv/group-server/minigames",
+      "java": {
+        "bin": "/opt/jdk8/bin/java",
+        "jar": "spigot-1.12.2.jar",
+        "jvm_args": [
+          "-Xms512m",
+          "-Xmx2g"
+        ],
+        "args": [
+          "nogui"
+        ],
+        "stop": "stop"
+      },
+      "probes": [
+        {
+          "type": "minecraft",
+          "host": "127.0.0.1",
+          "port": 25569,
+          "protocol": 340
+        }
+      ],
+      "save_rcon": {
+        "port": 25669,
+        "password_file": "/srv/group-server/private/minigames.rcon"
+      }
+    },
+    "proxy": {
+      "unit": "luo-java@proxy.service",
+      "cwd": "/srv/group-server/proxy",
+      "java": {
+        "bin": "/opt/jdk25/bin/java",
+        "jar": "BungeeCord.jar",
+        "jvm_args": [
+          "-Xms512m",
+          "-Xmx2g"
+        ],
+        "args": [],
+        "stop": "end"
+      },
+      "probes": [
+        {
+          "type": "minecraft",
+          "host": "127.0.0.1",
+          "port": 25565,
+          "protocol": 775
+        }
+      ],
+      "depends": [
+        "lobby",
+        "survival",
+        "bw",
+        "minigames"
+      ],
+      "save": "noop"
+    },
+    "master": {
+      "enabled": false,
+      "unit": "luo-master.service",
+      "probes": [
+        {
+          "type": "http",
+          "url": "http://127.0.0.1:18776/readyz"
+        }
+      ],
+      "stop_timeout": 3600,
+      "stop_before": [
+        "backup-worker",
+        "proxy",
+        "lobby",
+        "survival",
+        "bw",
+        "minigames"
+      ],
+      "process": {
+        "cwd": "/srv/group-server/master",
+        "argv": [
+          "/opt/luo-master/bin/luo-master",
+          "--config",
+          "/srv/group-server/private/master.json"
+        ]
+      }
+    },
+    "backup-worker": {
+      "enabled": false,
+      "unit": "luobackup-worker.service",
+      "depends": [
+        "master"
+      ],
+      "probes": [
+        {
+          "type": "worker-online",
+          "url": "http://127.0.0.1:18776/v1/topology",
+          "token_file": "/srv/group-server/private/master-observe.token"
+        }
+      ],
+      "process": {
+        "cwd": "/srv/group-server/master",
+        "argv": [
+          "/opt/luo-master/bin/luobackup-worker",
+          "--config",
+          "/srv/group-server/private/master.json"
+        ]
+      }
+    },
+    "spigotmaster-gal": {
+      "enabled": false,
+      "manage": false,
+      "depends": [
+        "lobby",
+        "survival",
+        "bw",
+        "minigames",
+        "proxy"
+      ],
+      "probes": [
+        {
+          "type": "mastergal",
+          "node": "proxy",
+          "plugin": "BungeeMasterGAL"
+        },
+        {
+          "type": "mastergal",
+          "node": "lobby",
+          "plugin": "SpigotMasterGAL"
+        },
+        {
+          "type": "mastergal",
+          "node": "survival",
+          "plugin": "SpigotMasterGAL"
+        },
+        {
+          "type": "mastergal",
+          "node": "bw",
+          "plugin": "SpigotMasterGAL"
+        },
+        {
+          "type": "mastergal",
+          "node": "minigames",
+          "plugin": "SpigotMasterGAL"
+        }
+      ]
+    },
+    "easytier": {
+      "enabled": false,
+      "unit": "easytier.service",
+      "manage": false,
+      "stop_managed": false
+    }
+  }
+}
